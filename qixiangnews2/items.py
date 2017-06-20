@@ -13,3 +13,4 @@ class Qixiangnews2Item(scrapy.Item):
     # name = scrapy.Field()
     title = scrapy.Field()
     href = scrapy.Field()
+    date = scrapy.Field()

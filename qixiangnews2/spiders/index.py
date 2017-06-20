@@ -1,7 +1,7 @@
 import scrapy
 from qixiangnews2.items import Qixiangnews2Item
 from scrapy.http import Request
-
+from scrapy.spiders import CrawlSpider,Rule
 
 class QiuBaiSpider(scrapy.Spider):
     name = 'qixiangnews'
@@ -12,16 +12,24 @@ class QiuBaiSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        for ele in response.xpath('//td[@class="nblue"]'):
+        for ele in response.xpath('//td[@class="nblue"]/a'):
             # titles = ele.xpath('./a/text()').extract()
-            a_node = ele.xpath('./a')
-            titles = a_node.xpath("string(.)").extract()
-            hrefs =ele.xpath('./a/@href').extract()
+            # a_node = ele.xpath('./a')
+            titles = ele.xpath("string(.)").extract()
+            hrefs =ele.xpath('./@href').extract()[0]
+            print(hrefs)
             detail_url = response.urljoin(hrefs)
-            req = Request(detail_url,self.parse_detail)
+            req = Request(detail_url, callback=self.parse_detail)
             item = Qixiangnews2Item()
+            item['href'] = hrefs
+            item['title'] = titles
             req.meta['item'] = item
             yield req
+
+    def parse_detail(self, response):
+        item = response.meta["item"]
+        item['date'] = response.xpath('//div[@class="news_textspan"]/div/span[2]/text()').extract()
+        yield item
 
             # yield Qixiangnews2Item(title=titles,href=hrefs)
 
