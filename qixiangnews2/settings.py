@@ -88,9 +88,9 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-MYSQL_HOST = 'localhost'
-MYSQL_DBNAME = 'mydb'         #数据库名字，请修改
-MYSQL_USER = 'admin'             #数据库账号，请修改
-MYSQL_PASSWD = 'admin'         #数据库密码，请修改
+MYSQL_HOST = '10.20.70.85'
+MYSQL_DBNAME = 'cdcv4'         #数据库名字，请修改
+MYSQL_USER = 'cdc'             #数据库账号，请修改
+MYSQL_PASSWD = 'cdc'         #数据库密码，请修改
 
 MYSQL_PORT = 3306

@@ -30,8 +30,8 @@ class Qixiangnews2Pipeline(object):
     #写入数据库中
     def _conditional_insert(self,tx,item):
         #print item['name']
-        sql="insert into qixiang(title,href,date) values(%s,%s,%s)"
-        params=(item["title"],item["href"],item["date"])
+        sql="insert into SUP_BR_NEWS(Title,link,publishDate,img,type,subjectType,invalid) values(%s,%s,%s,%s,%s,%s,%s)"
+        params=(item["title"],item["href"],item["date"],item['imgsrc'],1,1,0)
         tx.execute(sql, params)
 
     #错误处理方法
